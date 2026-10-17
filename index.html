@@ -181,7 +181,6 @@
 						
 						// Update progress UI
 						progressBar.css('width', progress + '%');
-						progressText.text(`Loading portfolio... ${progress}%`);
 						
 						// Preload large versions for zoom (if they exist)
 						// const largeImg = new Image();
@@ -209,7 +208,6 @@
 						// Update progress even on error
 						const progress = Math.round((loadedCount / totalPages) * 100);
 						progressBar.css('width', progress + '%');
-						progressText.text(`Loading portfolio... ${progress}%`);
 						
 						if (loadedCount === totalPages) {
 							setTimeout(() => {
