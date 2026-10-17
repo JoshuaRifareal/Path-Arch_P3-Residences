@@ -1,0 +1,681 @@
+<!doctype html>
+
+<html lang="en">
+
+	<head>
+		<title>Joshua Rifareal</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="title" property="og:title" content="Joshua Rifareal | Architectural Portfolio">
+		<meta name="description" property="og:description" content="A collection of selected architectural works by Joshua Rifareal">
+		<meta name="image" property="og:image" content="https://raw.githubusercontent.com/JoshuaRifareal/joshuarifareal.github.io/refs/heads/main/pics/preview.png">
+		<link rel="icon" type="image/png" href="pics/JRE Logo Light.ico" />
+		<link rel="stylesheet" href="css/preload.css" />
+
+		<script type="text/javascript" src="extras/jquery.min.1.7.js"></script>
+		<script type="text/javascript" src="extras/jquery-ui-1.8.20.custom.min.js"></script>
+		<script type="text/javascript" src="extras/modernizr.2.5.3.min.js"></script>
+		<script type="text/javascript" src="lib/hash.js"></script>
+		<script type="text/javascript" src="js/helptips.js"></script>
+
+		<script type="text/javascript">
+			(function(c,l,a,r,i,t,y){
+				c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+				t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+				y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+			})(window, document, "clarity", "script", "tme485sy4p");
+		</script>
+
+		<style>
+			.magazine:after { 
+				transition: opacity 0s ease; opacity: 0; visibility: hidden; 
+			}
+			.magazine:before { 
+				transition: opacity 0s ease; opacity: 1; visibility: visible; 
+			}
+		</style>
+
+	</head>
+
+	<body>
+
+		<div id="canvas">
+
+			<!-- <div class="logo"><img src="./pics/JRE Logo Light.ico" alt="">Joshua Rifareal</div> -->
+
+			<div class="action-bar">
+				<div class="download-button"><div></div></div>
+				<div class="restart-button"><div></div></div>
+			</div>
+
+			<div class="magazine-viewport">
+				<div class="container" draggable="false">
+					<div class="magazine" draggable="false">
+					</div>
+				</div>
+			</div>
+
+			<!-- <div class="developer-credits">Website designed and developed by <a href="https://github.com/JoshuaRifareal">Joshua Rifareal</a></div> -->
+
+		</div>
+
+		<div class="messages">
+			<div class="welcome-message"><div></div></div>
+			<div class="awesome-message"><div></div></div>
+			<div class="zoomhow-message"><div></div></div>
+			<div class="zoomesc-message"><div></div></div>
+			<div class="outro-message"><div></div></div>
+		</div>
+
+
+		<script type="text/javascript">
+
+			// === MOBILE LANDSCAPE DETECTION ===
+			function setupLandscapeOverlay() {
+				// Create overlay element dynamically
+				var overlay = $('<div id="landscape-overlay"></div>');
+				var content = $('<div class="landscape-content"></div>');
+				var message = $('<div class="landscape-message">Please rotate your device to landscape mode</div>');
+				var phoneSvg = `
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+						<path d="M19 12.0039H19.01" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+						<path d="M2 10.5L2 13.5C2 15.857 2 17.0355 2.73223 17.7678C3.46447 18.5 4.64298 18.5 7 18.5H17C19.357 18.5 20.5355 18.5 21.2678 17.7678C22 17.0355 22 15.857 22 13.5V10.5C22 8.14298 22 6.96447 21.2678 6.23223C20.5355 5.5 19.357 5.5 17 5.5L7 5.5C4.64298 5.5 3.46447 5.5 2.73223 6.23223C2 6.96447 2 8.14298 2 10.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+					</svg>
+				`;
+				var phoneIcon = $(phoneSvg);
+
+				// Build the overlay structure
+				content.append(phoneIcon, message);
+				overlay.append(content);
+				
+				// Apply styles via JavaScript
+				overlay.css({
+					'position': 'fixed',
+					'top': '0',
+					'left': '0',
+					'width': '100vw',
+					'height': '100vh',
+					'background': '#1a1a1a',
+					'color': 'white',
+					'z-index': '100000',
+					'font-family': 'Arial, sans-serif',
+					'display': 'none',
+					'user-select': 'none',
+					'z-index': '9999999999999',
+				});
+				
+				content.css({
+					'display': 'flex',
+					'flex-direction': 'column',
+					'justify-content': 'center',
+					'align-items': 'center',
+					'height': '100%',
+					'text-align': 'center',
+					'padding': '20px'
+				});
+				
+				phoneIcon.css({
+					'font-size': '48px',
+					'margin-bottom': '20px',
+					'animation': 'rotateIcon 2s ease-in-out infinite'
+				});
+				
+				message.css({
+					'font-size': '18px',
+					'line-height': '1.4'
+				});
+				
+				// Add to body
+				$('body').append(overlay);
+				
+				// Add keyframes for animation
+				$('<style>@keyframes rotateIcon { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } } }</style>').appendTo('head');
+				
+				function checkOrientation() {
+					var isMobile = $(window).width() <= 768;
+					var isPortrait = window.innerHeight > window.innerWidth;
+					
+					if (isMobile && isPortrait) {
+						// Show overlay, hide content
+						overlay.show();
+						$('#canvas, .welcome-message, .awesome-message, .zoomhow-message, .zoomesc-message, .outro-message').hide();
+					} else {
+						// Hide overlay, show content
+						overlay.hide();
+						$('#canvas, .welcome-message, .awesome-message, .zoomhow-message, .zoomesc-message, .outro-message').show();
+					}
+				}
+				
+				// Initial check
+				checkOrientation();
+				
+				// Listen for changes
+				$(window).on('resize orientationchange', checkOrientation);
+				
+				// Periodic check for reliability
+				setInterval(checkOrientation, 1000);
+			}
+
+
+			// === PRELOAD FUNCTION ===
+			function preloadAllImages() {
+				const totalPages = 44; // From your turn.js config
+				let loadedCount = 0;
+				let hasErrors = false;
+				
+				// Create progress UI
+				const progressContainer = $('<div class="preload-overlay"></div>');
+				const progressBarContainer = $('<div class="preload-progress-bar-container"></div>');
+				const progressBar = $('<div class="preload-progress-bar"></div>');
+				const progressText = $('<div class="preload-text">Loading portfolio... 0%</div>');
+				const progressSubtext = $('<div class="preload-subtext">Preparing high-resolution images</div>');
+				
+				progressBarContainer.append(progressBar);
+				progressContainer.append(progressBarContainer, progressText, progressSubtext);
+				$('body').prepend(progressContainer);
+				
+				// Preload all page images
+				for (let page = 1; page <= totalPages; page++) {
+					const img = new Image();
+					img.src = `content/Frame ${page}.webp`;
+					
+					img.onload = function() {
+						loadedCount++;
+						const progress = Math.round((loadedCount / totalPages) * 100);
+						
+						// Update progress UI
+						progressBar.css('width', progress + '%');
+						progressText.text(`Loading portfolio... ${progress}%`);
+						
+						// Preload large versions for zoom (if they exist)
+						// const largeImg = new Image();
+						// largeImg.src = `content/Frame ${page}-large.jpg`;
+						
+						// Check if all images are loaded
+						if (loadedCount === totalPages) {
+							setTimeout(() => {
+								progressContainer.fadeOut(500, function() {
+									$(this).remove();
+									// Start the main application
+									if (typeof loadApp === 'function') {
+										loadApp();
+									}
+								});
+							}, 500);
+						}
+					};
+					
+					img.onerror = function() {
+						loadedCount++; // Count errors as loaded to avoid hanging
+						hasErrors = true;
+						console.warn(`Failed to load image for page ${page}`);
+						
+						// Update progress even on error
+						const progress = Math.round((loadedCount / totalPages) * 100);
+						progressBar.css('width', progress + '%');
+						progressText.text(`Loading portfolio... ${progress}%`);
+						
+						if (loadedCount === totalPages) {
+							setTimeout(() => {
+								progressContainer.fadeOut(500, function() {
+									$(this).remove();
+									if (typeof loadApp === 'function') {
+										loadApp();
+									}
+								});
+							}, 500);
+						}
+					};
+				}
+			}
+
+			// === LOAD SEQUENCE ===
+			$(document).ready(function() {
+				// 
+				setupLandscapeOverlay();
+				preloadAllImages();
+				
+				
+				// Load dependencies while images preload
+				yepnope({
+					test: Modernizr.csstransforms,
+					yep: ['../../lib/turn.js'],
+					nope: ['../../lib/turn.html4.min.js', 'css/jquery.ui.html4.css'],
+					both: ['../../lib/zoom.min.js', 'css/jquery.ui.css', 'js/magazine.js', 'css/magazine.css'],
+					complete: function() {
+						// loadApp() will be called from preload completion
+						console.log('Dependencies loaded, waiting for images...');
+					}
+				});
+			});
+
+			// === LOAD APP ===
+			function loadApp() {
+				$('#canvas').fadeIn(1000);
+
+				// === CLARITY ===
+				initClarityTracking();
+
+				// Show welcome message
+				welcomeMessage(8000);
+
+				var flipbook = $('.magazine');
+
+				// Check if the CSS was already loaded
+				
+				if (flipbook.width()==0 || flipbook.height()==0) {
+					setTimeout(loadApp, 10);
+					return;
+				}
+				
+				// Create the flipbook
+				flipbook.turn({
+					width: 1660,
+					height: 1170,
+					duration: 1000,
+					gradients: false,
+					autoCenter: true,
+					elevation: 100,
+					pages: 44,
+					acceleration: true,
+					display: 'double',
+
+					when: {
+						first: function(event, page, view) {
+							$('<style>.magazine:after { transition: opacity 0.5s ease; opacity: 0; visibility: hidden; }</style>').appendTo('head');
+							welcomeMessage(3000);
+						},
+						pressed: function(event, page, view) {
+							if ($(this).turn('view')[0] == 2 && page.corner == "bl") {
+								$('<style>.magazine:after { transition: opacity 0.5s ease; opacity: 0; visibility: hidden; }</style>').appendTo('head');
+							}
+							if ($(this).turn('view')[1] == $(this).turn('pages') - 1 && page.corner == "br" ) {
+								$('<style>.magazine:before { transition: opacity 0.5s ease; opacity: 0; visibility: hidden; }</style>').appendTo('head');
+							}
+						},
+						released: function(event, page, view) {
+							console.log("released ", $(this).turn('view'), " at ", page.corner);
+							
+							if ($(this).turn('view')[0] == 2 && page.corner == "bl" ) {
+								$('<style>.magazine:after { transition: opacity 1s ease; opacity: 1; visibility: visible; }</style>').appendTo('head');
+							}
+							if ($(this).turn('view')[1] ==  $(this).turn('pages') - 1 && page.corner == "br" ) {
+								$('<style>.magazine:before { transition: opacity 1s ease; opacity: 1; visibility: visible; }</style>').appendTo('head');
+							}
+						},
+						turning: function(event, page, view) {
+							var book = $(this),
+							currentPage = book.turn('page'),
+							pages = book.turn('pages');
+					
+							Hash.go('page/' + page).update();
+							disableControls(page);
+						},
+						turned: function(event, page, view) {
+							disableControls(page);
+							$(this).turn('center');
+							$('#slider').slider('value', getViewNumber($(this), page));
+
+							if (page==1) { 
+								$(this).turn('peel', 'br');
+								welcomeMessage(3000);
+							}
+
+							if (page==2) {
+								awesomeMessageShow(500);
+								awesomeMessageHide(3000, 500);
+							}
+
+							if (page==4 || page==22 || page==23 || page==30 || page==31) {
+								zoomMessageShow(3000, 500);
+								outroMessageHide(250);
+							} 
+							
+							if (page==5 || page==6 || page==24 || page==32 ) {
+								zoomMessageHide(500, 500);
+							}
+
+							if (page==42 || page==43 || page==44) {
+								outroMessageShow(500);
+							} else {
+								outroMessageHide(250);
+							}
+
+							if (page!=1) {
+								$('<style>.magazine:after { transition: opacity 1s ease; opacity: 1; visibility: visible; }</style>').appendTo('head');
+								$('.welcome-message > div').fadeOut(0);
+							}
+							if (page!=$(this).turn('pages')) {
+								$('<style>.magazine:before { transition: opacity 1s ease; opacity: 1; visibility: visible; }</style>').appendTo('head');
+							}
+							if (page==($(this).turn('pages')-1) || page==($(this).turn('pages')-2)) {
+								$('<style>.magazine:before { transition: opacity 1s ease; opacity: 1; visibility: visible; }</style>').appendTo('head');
+							}
+						},
+						last: function(event, page, view) {
+							$('<style>.magazine:before { transition: opacity 0.5s ease; opacity: 0; visibility: hidden; }</style>').appendTo('head');
+						},
+						missing: function (event, pages) {
+							for (var i = 0; i < pages.length; i++)
+								addPage(pages[i], $(this));
+						}
+					}
+				});
+
+				// Zoom.js
+				$('.magazine-viewport').zoom({
+					flipbook: $('.magazine'),
+
+					max: function() { 
+						
+						return largeMagazineWidth()/$('.magazine').width();
+
+					}, 
+
+					when: {
+						swipeLeft: function() {
+
+							$(this).zoom('flipbook').turn('next');
+
+						},
+
+						swipeRight: function() {
+							
+							$(this).zoom('flipbook').turn('previous');
+
+						},
+
+						zoomIn: function () {
+
+							$('#slider-bar').hide();
+							$('.made').hide();
+							$('.magazine').removeClass('animated').addClass('zoom-in');
+							$('.zoom-icon').removeClass('zoom-icon-in').addClass('zoom-icon-out');
+							
+							zoomEscapeShow(500);
+							console.log("zoomed in")
+
+							outroMessageHide(500);
+						},
+
+						zoomOut: function () {
+
+							$('#slider-bar').fadeIn();
+							$('.made').fadeIn();
+							$('.zoom-icon').removeClass('zoom-icon-out').addClass('zoom-icon-in');
+
+							setTimeout(function(){
+								$('.magazine').addClass('animated').removeClass('zoom-in');
+								resizeViewport();
+							}, 0);
+
+							zoomEscapeHide(500)
+							console.log("zoomed out")
+						}
+					}
+				});
+
+				// Zoom event
+				if ($.isTouch) {
+					$('.magazine-viewport').bind('zoom.doubleTap', zoomTo);
+				} else {
+					$('.magazine-viewport').bind('zoom.tap', zoomTo);
+				}
+
+				// Using arrow keys to turn the page
+				$(document).keydown(function(e){
+
+					var previous = 37, // Left arrow key
+						next = 39,     // Right arrow key
+						esc = 27,      // Escape key
+						rKey = 82;     // R key
+
+					switch (e.keyCode) {
+						case previous:
+
+							// Left arrow
+							$('.magazine').turn('previous');
+							e.preventDefault();
+
+						break;
+						case next:
+
+							// Right arrow
+							$('.magazine').turn('next');
+							e.preventDefault();
+
+						break;
+						case esc:
+							
+							// Escape key to zoom out
+							$('.magazine-viewport').zoom('zoomOut');    
+							e.preventDefault();
+
+						break;
+						case rKey:
+
+							// R key to turn to page 1
+							$('.magazine').turn('page', 1);
+							e.preventDefault();
+
+						break;
+					}
+				});
+
+
+				// URIs - Format #/page/1 
+				Hash.on('^page\/([0-9]*)$', {
+					yep: function(path, parts) {
+						var page = parts[1];
+
+						if (page!==undefined) {
+							if ($('.magazine').turn('is'))
+								$('.magazine').turn('page', page);
+						}
+
+					},
+					nop: function(path) {
+
+						if ($('.magazine').turn('is'))
+							$('.magazine').turn('page', 1);
+					}
+				});
+
+
+				$(window).resize(function() {
+					resizeViewport();
+				}).bind('orientationchange', function() {
+					resizeViewport();
+				});
+
+				// Events for the next button
+				$('.next-button').bind($.mouseEvents.over, function() {
+					
+					$(this).addClass('next-button-hover');
+
+				}).bind($.mouseEvents.out, function() {
+					
+					$(this).removeClass('next-button-hover');
+
+				}).bind($.mouseEvents.down, function() {
+					
+					$(this).addClass('next-button-down');
+
+				}).bind($.mouseEvents.up, function() {
+					
+					$(this).removeClass('next-button-down');
+
+				}).click(function() {
+					
+					$('.magazine').turn('next');
+
+				});
+
+				// Events for the next button
+				$('.previous-button').bind($.mouseEvents.over, function() {
+					
+					$(this).addClass('previous-button-hover');
+
+				}).bind($.mouseEvents.out, function() {
+					
+					$(this).removeClass('previous-button-hover');
+
+				}).bind($.mouseEvents.down, function() {
+					
+					$(this).addClass('previous-button-down');
+
+				}).bind($.mouseEvents.up, function() {
+					
+					$(this).removeClass('previous-button-down');
+
+				}).click(function() {
+					
+					$('.magazine').turn('previous');
+
+				});
+
+
+				// Slider
+				$( "#slider" ).slider({
+					min: 1,
+					max: numberOfViews(flipbook),
+
+					start: function(event, ui) {
+
+						if (!window._thumbPreview) {
+							_thumbPreview = $('<div />', {'class': 'thumbnail'}).html('<div></div>');
+							setPreview(ui.value);
+							_thumbPreview.appendTo($(ui.handle));
+						} else
+							setPreview(ui.value);
+
+						moveBar(false);
+
+					},
+
+					slide: function(event, ui) {
+
+						setPreview(ui.value);
+
+					},
+
+					stop: function() {
+
+						if (window._thumbPreview)
+							_thumbPreview.removeClass('show');
+						
+						$('.magazine').turn('page', Math.max(1, $(this).slider('value')*2 - 2));
+
+					}
+				});
+
+				resizeViewport();
+
+				$('.magazine').addClass('animated');
+
+			}
+
+			// === INTERACTIONS ===
+			$('.zoom-icon').bind('mouseover', function() { 
+				
+				if ($(this).hasClass('zoom-icon-in'))
+					$(this).addClass('zoom-icon-in-hover');
+
+				if ($(this).hasClass('zoom-icon-out'))
+					$(this).addClass('zoom-icon-out-hover');
+			
+			}).bind('mouseout', function() { 
+				
+				if ($(this).hasClass('zoom-icon-in'))
+					$(this).removeClass('zoom-icon-in-hover');
+				
+				if ($(this).hasClass('zoom-icon-out'))
+					$(this).removeClass('zoom-icon-out-hover');
+
+			}).bind('click', function() {
+
+				if ($(this).hasClass('zoom-icon-in'))
+					$('.magazine-viewport').zoom('zoomIn');
+				else if ($(this).hasClass('zoom-icon-out'))	
+					$('.magazine-viewport').zoom('zoomOut');
+
+			});
+
+			$('#canvas').hide();
+
+
+			// === CLARITY TRACKING ===
+			function initClarityTracking() {
+				// Check if Clarity is available (not blocked)
+				if (typeof clarity !== 'function') {
+					console.log('Clarity not available (may be blocked by user)');
+					return;
+				}
+				
+				const sessionStart = new Date();
+				let pagesViewed = new Set([1]);
+				let zoomUsed = false;
+				
+				console.log('Clarity tracking initialized');
+				
+				// Track page turns
+				$(document).on('turned', '.magazine', function(event, page) {
+					if (typeof clarity !== 'function') return;
+					
+					pagesViewed.add(page);
+					
+					clarity('event', 'portfolio_page_turn', {
+						page_number: page,
+						total_pages_viewed: pagesViewed.size
+					});
+					
+					// Track project views
+					const projectPages = [4, 5, 6, 22, 23, 24, 30, 31, 32];
+					if (projectPages.includes(page)) {
+						clarity('event', 'project_view', {
+							project_page: page
+						});
+					}
+					
+					// Track completion
+					if (page >= 42) {
+						const completion = Math.round((page / 44) * 100);
+						clarity('event', 'portfolio_completion', {
+							completion_percentage: completion
+						});
+					}
+				});
+				
+				// Track zoom
+				$(document).on('zoomIn', '.magazine-viewport', function() {
+					if (typeof clarity !== 'function') return;
+					if (!zoomUsed) {
+						zoomUsed = true;
+						clarity('event', 'zoom_used');
+					}
+				});
+				
+				// Track portfolio opened
+				clarity('event', 'portfolio_opened');
+			}
+
+
+			// Temporary device width display
+			$(document).ready(function() {
+				var widthDisplay = $('<div style="position: fixed; top: 10px; left: 10px; background: rgba(0,0,0,0.8); color: white; padding: 10px; z-index: 999999; font-family: Arial; font-size: 14px; border-radius: 5px;"></div>');
+				// $('body').append(widthDisplay);
+				
+				function updateWidthDisplay() {
+					var width = $(window).width();
+					var height = $(window).height();
+					widthDisplay.text('Width: ' + width + 'px × Height: ' + height + 'px');
+				}
+				
+				updateWidthDisplay();
+				$(window).on('resize', updateWidthDisplay);
+			});
+
+		</script>
+
+	</body>
+
+</html>
